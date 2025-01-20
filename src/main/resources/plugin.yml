@@ -1,0 +1,8 @@
+name: FutureTech
+main: net.bxx2004.futuretech.FutureTech
+version: beta-0.1.2
+author: bxx2004
+api-version: 1.13
+description: A SlimefunAddon
+depend:
+  - Slimefun

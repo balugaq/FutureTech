@@ -1,0 +1,63 @@
+itemgroup:
+  main: "未来科技 (FutureTech)"
+  robot: "机器人"
+  materials: "材料"
+  machine: "机器"
+  object: "物品"
+mobs:
+  FT_SIRI:
+    name: "&e陨星机器人"
+  FT_METEOR:
+    name: "&e珠宝守护者"
+  FT_BOOS:
+    name: "&e超级机械龙"
+items:
+  FT_COPPERSWORD:
+    name: "&f陨铜剑"
+    lore: " |&7陨铜打造而成|&7具有非凡的威力|&7攻击时有10%几率给予对手迷幻效果"
+  FT_SEARCHER:
+    name: "&f陨石搜寻者"
+    lore: " |&7使用它可以提取陨铜矿物|&7一次性物品,无法充电"
+  FT_COOPER:
+    name: "&f陨石矿"
+    lore: " |&7在未来世界地表产出"
+  FT_METEORCOPPER:
+    name: "&f陨铜"
+    lore: " |&7精致的陨铜|&7我猜你看过三叔写的《老九门》"
+  FT_ENERGYORE:
+    name: "&f能晶矿"
+    lore: " |&7在未来世界产出"
+  FT_ENERGYBLOCK:
+    name: "&f能晶块"
+    lore: " |&7蕴含着巨大的能量|&7由稀有的能晶矿合成"
+  FT_GUIDE:
+    name: "&f合成指导手册"
+    lore: " |&7By: bxx2004"
+  FT_CPU:
+    name: "&f空的芯片"
+    lore: " |&7一个空壳芯片|&7你可以使用&f芯片组装机&7组装它|&7前提是你有一个&f芯片模型"
+  FT_SIRICPU:
+    name: "&fSiri的智能芯片"
+    lore: " |&7由空芯片组装而来|&7你可以使用&f机器人制造台&7组装机器人|&7这是Siri机器人的核心"
+  FT_SIRIMODEL:
+    name: "&fSiri的智能芯片模型"
+    lore: " |&7只是一个模型而已|&7你可以使用&f芯片组装机&7组装它|&7合成一个Siri的智能芯片"
+  FT_ROBOTARM:
+    name: "&f机器人手臂"
+    lore: " |&7用来组装机器人|&7在&9未来世界&7击杀生物掉落"
+  FT_SIRIROBOT:
+    name: "&fSIRI机器人"
+    lore: " |&7在玩家在机器人10 x 10的范围内时|&7输入 &fHi Siri &7将会为您打开功能页面|&7当然,功能是可以由服主自定义的"
+  FT_DOOR:
+    name: "&f未来世界传送门框架"
+    lore: " |&7构造未来世界传送门的框架|&7你必须在传送门5x5以内喝下一桶牛奶才可以进入未来世界|&7建造方法查看手册"
+  FT_CORE:
+    name: "&f未来世界传送门核心"
+    lore: " |&7构造未来世界传送门的核心|&7你必须在传送门5x5以内喝下一桶牛奶才可以进入未来世界|&7建造方法查看手册"
+blocks:
+  FT_CPUMAKER:
+    name: "&f芯片组装机"
+    lore: " |&7用于组装机器人的智能芯片|&7由你的脑电波控制|&7所以它不需要耗电 :)"
+  FT_MAKER:
+    name: "&f未来科技制造台"
+    lore: " |&7未来的高科技产物制作装置|&c它可以创造出各式的机器人|&d从而解放人类的双手"
