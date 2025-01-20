@@ -5,9 +5,9 @@ import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import net.bxx2004.futuretech.FutureTech;
 import net.bxx2004.futuretech.core.data.ConfigManager;
-import net.bxx2004.pandalib.bukkit.pitem.PItemStack;
-import net.bxx2004.pandalib.bukkit.planguage.PAction;
-import net.bxx2004.pandalib.bukkit.putil.PMath;
+import net.bxx2004.pandalib.bukkit.item.PItemStack;
+import net.bxx2004.pandalib.bukkit.language.abandon.PAction;
+import net.bxx2004.pandalib.bukkit.util.PMath;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -46,35 +46,36 @@ public class SlimefunFactory {
     public static Research BASIC;
     public static Research ROBOT_R;
     public static Research OBJECT_R;
-    public static void init(){
+
+    public static void init() {
         MAIN.register(FutureTech.instance());
         ROBOT.register(FutureTech.instance());
         MACHINE.register(FutureTech.instance());
         OBJECT.register(FutureTech.instance());
         MATERIALS.register(FutureTech.instance());
-        if (ConfigManager.enableResearch()){
-            CPU = new Research(Tools.key("CPU"),1,"CPU",10);
-            BASIC = new Research(Tools.key("BASIC"),2,"BASIC",10);
-            ROBOT_R = new Research(Tools.key("ROBOT"),3,"ROBOT",10);
-            OBJECT_R = new Research(Tools.key("OBJECT"),4,"OBJECT",10);
+        if (ConfigManager.enableResearch()) {
+            CPU = new Research(Tools.key("CPU"), 1, "CPU", 10);
+            BASIC = new Research(Tools.key("BASIC"), 2, "BASIC", 10);
+            ROBOT_R = new Research(Tools.key("ROBOT"), 3, "ROBOT", 10);
+            OBJECT_R = new Research(Tools.key("OBJECT"), 4, "OBJECT", 10);
             BASIC.register();
             OBJECT_R.register();
             CPU.register();
             ROBOT_R.register();
         }
-        new PAction("cooldown"){
+        new PAction("cooldown") {
             @Override
             public Object run(Player player, String... strings) {
-                String type= strings[0];
-                if (type.equalsIgnoreCase("add")){
+                String type = strings[0];
+                if (type.equalsIgnoreCase("add")) {
                     float value = Float.parseFloat(strings[1]);
-                    FutureTech.cooldown.addCoolDownOfKey("FT_SIRIROBOT",player,value);
+                    FutureTech.cooldown.addCoolDownOfKey("FT_SIRIROBOT", player, value);
                 }
-                if (type.equalsIgnoreCase("look")){
-                    return PMath.formatDouble(FutureTech.cooldown.lookCoolDownOfKey("FT_SIRIROBOT",player));
+                if (type.equalsIgnoreCase("look")) {
+                    return PMath.formatDouble(FutureTech.cooldown.lookCoolDownOfKey("FT_SIRIROBOT", player));
                 }
-                if (type.equalsIgnoreCase("is")){
-                    return FutureTech.cooldown.isCoolDown("FT_SIRIROBOT",player);
+                if (type.equalsIgnoreCase("is")) {
+                    return FutureTech.cooldown.isCoolDown("FT_SIRIROBOT", player);
                 }
                 return null;
             }

@@ -4,14 +4,13 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import net.bxx2004.futuretech.core.data.ConfigManager;
 import net.bxx2004.futuretech.core.utils.RegisterItem;
 import net.bxx2004.futuretech.slimefun.SlimefunFactory;
 import net.bxx2004.futuretech.slimefun.inventory.GuideMenu;
 import net.bxx2004.futuretech.slimefun.main.Item;
-import net.bxx2004.pandalib.bukkit.pitem.PItemStack;
-import net.bxx2004.pandalib.bukkit.plistener.PListener;
+import net.bxx2004.pandalib.bukkit.item.PItemStack;
+import net.bxx2004.pandalib.bukkit.listener.PListener;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -22,6 +21,7 @@ public class FT_GUIDE extends Item<PItemStack> {
     public FT_GUIDE() {
         super();
     }
+
     @Override
     public PItemStack itemStack() {
         return new PItemStack(Material.BOOK,
@@ -42,19 +42,19 @@ public class FT_GUIDE extends Item<PItemStack> {
     @Override
     public ItemStack[] recipe() {
         return new ItemStack[]{
-                null,null,null,
-                null,new ItemStack(Material.WRITABLE_BOOK),null,
-                null,null,null
+                null, null, null,
+                null, new ItemStack(Material.WRITABLE_BOOK), null,
+                null, null, null
         };
     }
 
     @Override
     public PListener listener() {
-        return new PListener(){
+        return new PListener() {
             @EventHandler
-            public void onClick(PlayerInteractEvent event){
-                if (SlimefunItem.getByItem(event.getItem()) != null){
-                    if (SlimefunItem.getByItem(event.getItem()).getId().equals("FT_GUIDE")){
+            public void onClick(PlayerInteractEvent event) {
+                if (SlimefunItem.getByItem(event.getItem()) != null) {
+                    if (SlimefunItem.getByItem(event.getItem()).getId().equals("FT_GUIDE")) {
                         new GuideMenu().open(event.getPlayer());
                     }
                 }

@@ -7,16 +7,17 @@ import net.bxx2004.futuretech.core.data.ConfigManager;
 import net.bxx2004.futuretech.core.utils.RegisterItem;
 import net.bxx2004.futuretech.slimefun.SlimefunFactory;
 import net.bxx2004.futuretech.slimefun.main.Item;
-import net.bxx2004.futuretech.slimefun.main.machine.FT_MAKER;
-import net.bxx2004.pandalib.bukkit.pitem.PItemStack;
-import net.bxx2004.pandalib.bukkit.plistener.PListener;
+import net.bxx2004.pandalib.bukkit.item.PItemStack;
+import net.bxx2004.pandalib.bukkit.listener.PListener;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
 @RegisterItem
 public class FT_METEORCOPPER extends Item<PItemStack> {
-    public FT_METEORCOPPER(){
+    public FT_METEORCOPPER() {
         super();
     }
+
     @Override
     public PItemStack itemStack() {
         return new PItemStack(
@@ -33,16 +34,16 @@ public class FT_METEORCOPPER extends Item<PItemStack> {
 
     @Override
     public RecipeType type() {
-        RecipeType t = new RecipeType(new FT_COOPER().itemStack().clone(),"FT_COPPER");
+        RecipeType t = new RecipeType(new FT_COOPER().itemStack().clone(), "FT_COPPER");
         return t;
     }
 
     @Override
     public ItemStack[] recipe() {
         return new ItemStack[]{
-                null,null,null,
-                null,new PItemStack(Material.BOOK,"&e由该物品探测得到"),null,
-                null,null,null
+                null, null, null,
+                null, new PItemStack(Material.BOOK, "&e由该物品探测得到"), null,
+                null, null, null
         };
     }
 

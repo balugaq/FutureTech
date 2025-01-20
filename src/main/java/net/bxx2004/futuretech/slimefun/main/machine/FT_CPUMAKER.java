@@ -11,8 +11,8 @@ import net.bxx2004.futuretech.core.utils.RegisterItem;
 import net.bxx2004.futuretech.slimefun.SlimefunFactory;
 import net.bxx2004.futuretech.slimefun.Tools;
 import net.bxx2004.futuretech.slimefun.main.Item;
-import net.bxx2004.pandalib.bukkit.pitem.PItemStack;
-import net.bxx2004.pandalib.bukkit.plistener.PListener;
+import net.bxx2004.pandalib.bukkit.item.PItemStack;
+import net.bxx2004.pandalib.bukkit.listener.PListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -22,10 +22,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
 @RegisterItem
-public class FT_CPUMAKER extends Item<PItemStack>{
-    private static Inventory inventory = Bukkit.createInventory(Tools.setHolder("FT_CPUMAKER"), 27,ConfigManager.blockName("FT_CPUMAKER"));
-    public FT_CPUMAKER(){
+public class FT_CPUMAKER extends Item<PItemStack> {
+    private static Inventory inventory = Bukkit.createInventory(Tools.setHolder("FT_CPUMAKER"), 27, ConfigManager.blockName("FT_CPUMAKER"));
+
+    public FT_CPUMAKER() {
         super();
     }
 
@@ -49,59 +51,60 @@ public class FT_CPUMAKER extends Item<PItemStack>{
     @Override
     public ItemStack[] recipe() {
         return new ItemStack[]{
-                SlimefunItems.STEEL_PLATE,SlimefunItems.STEEL_PLATE,SlimefunItems.STEEL_PLATE,
-                SlimefunItems.ADVANCED_CIRCUIT_BOARD,SlimefunItems.ADVANCED_CIRCUIT_BOARD,SlimefunItems.ADVANCED_CIRCUIT_BOARD,
-                SlimefunItems.ELECTRIC_MOTOR,SlimefunItems.HEATING_COIL,SlimefunItems.ELECTRIC_MOTOR
+                SlimefunItems.STEEL_PLATE, SlimefunItems.STEEL_PLATE, SlimefunItems.STEEL_PLATE,
+                SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
+                SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.HEATING_COIL, SlimefunItems.ELECTRIC_MOTOR
         };
     }
 
     @Override
     public PListener listener() {
-        return new PListener(){
+        return new PListener() {
             @EventHandler
-            public void onClick(PlayerInteractEvent event){
-                if (event.getAction() == Action.RIGHT_CLICK_BLOCK){
+            public void onClick(PlayerInteractEvent event) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     Block block = event.getClickedBlock();
-                    if (BlockStorage.check(block,"FT_CPUMAKER")){
+                    if (BlockStorage.check(block, "FT_CPUMAKER")) {
                         event.setCancelled(true);
-                        for (int i = 00 ;i<27;i++){
-                            if (i == 12 || i==14 || i==22){
+                        for (int i = 00; i < 27; i++) {
+                            if (i == 12 || i == 14 || i == 22) {
                                 continue;
                             }
-                            inventory.setItem(i,new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
+                            inventory.setItem(i, new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
                         }
-                        inventory.setItem(13,new PItemStack(Material.GREEN_STAINED_GLASS_PANE,"&e请点击这里制造").clone());
+                        inventory.setItem(13, new PItemStack(Material.GREEN_STAINED_GLASS_PANE, "&e请点击这里制造").clone());
                         event.getPlayer().openInventory(inventory);
                     }
                 }
             }
+
             @EventHandler
-            public void onUse(InventoryClickEvent event){
+            public void onUse(InventoryClickEvent event) {
                 try {
-                    if (event.getInventory().getHolder().equals(Tools.holder("FT_CPUMAKER"))){
-                        int[] i = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,13,15,16,17,18,19,20,21,23,24,25,26};
-                        for (int a : i){
-                            if (event.getRawSlot() == a){
+                    if (event.getInventory().getHolder().equals(Tools.holder("FT_CPUMAKER"))) {
+                        int[] i = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26};
+                        for (int a : i) {
+                            if (event.getRawSlot() == a) {
                                 event.setCancelled(true);
                             }
                         }
                         SlimefunItem one = SlimefunItem.getByItem(event.getInventory().getItem(12));
                         SlimefunItem two = SlimefunItem.getByItem(event.getInventory().getItem(14));
-                        if (event.getRawSlot() == 13){
-                            if ((one != null) &&(two != null)){
-                                if (one.getId().equals("FT_CPU")){
-                                    switch (two.getId()){
+                        if (event.getRawSlot() == 13) {
+                            if ((one != null) && (two != null)) {
+                                if (one.getId().equals("FT_CPU")) {
+                                    switch (two.getId()) {
                                         case "FT_SIRIMODEL":
-                                            event.getInventory().setItem(12,new ItemStack(Material.AIR));
-                                            event.getInventory().setItem(14,new ItemStack(Material.AIR));
-                                            event.getInventory().setItem(22,SlimefunItem.getById("FT_SIRICPU").getItem());
+                                            event.getInventory().setItem(12, new ItemStack(Material.AIR));
+                                            event.getInventory().setItem(14, new ItemStack(Material.AIR));
+                                            event.getInventory().setItem(22, SlimefunItem.getById("FT_SIRICPU").getItem());
                                             break;
                                     }
                                 }
                             }
                         }
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }

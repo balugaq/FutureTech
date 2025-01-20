@@ -7,6 +7,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
+
 import java.util.Random;
 
 public class FutureOrePopulator extends BlockPopulator {
@@ -17,16 +18,16 @@ public class FutureOrePopulator extends BlockPopulator {
         int y = random.nextInt(15) + 1;
         int z = random.nextInt(16);
         while (random.nextDouble() < 0.8D) {
-            chunk.getBlock(x,y,z).setType(Material.DEEPSLATE_LAPIS_ORE);
-            BlockStorage.store(chunk.getBlock(x,y,z), new FT_ENERGYORE().getItem().getItem());
+            chunk.getBlock(x, y, z).setType(Material.DEEPSLATE_LAPIS_ORE);
+            BlockStorage.store(chunk.getBlock(x, y, z), new FT_ENERGYORE().getItem().getItem());
         }
-        if (random.nextInt(16) < 1){
+        if (random.nextInt(16) < 1) {
             int x1 = random.nextInt(16);
             int z1 = random.nextInt(16);
             int y1 = 255;
             while (chunk.getBlock(x1, y1, z1).getType() == Material.AIR) y1--;
             chunk.getBlock(x1, y1, z1).setType(Material.GILDED_BLACKSTONE);
-            BlockStorage.store(chunk.getBlock(x1,y1,z1), new FT_COOPER().getItem().getItem());
+            BlockStorage.store(chunk.getBlock(x1, y1, z1), new FT_COOPER().getItem().getItem());
         }
     }
 }

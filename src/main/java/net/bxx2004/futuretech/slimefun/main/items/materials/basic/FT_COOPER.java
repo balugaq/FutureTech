@@ -7,15 +7,17 @@ import net.bxx2004.futuretech.core.data.ConfigManager;
 import net.bxx2004.futuretech.core.utils.RegisterItem;
 import net.bxx2004.futuretech.slimefun.SlimefunFactory;
 import net.bxx2004.futuretech.slimefun.main.Item;
-import net.bxx2004.pandalib.bukkit.pitem.PItemStack;
-import net.bxx2004.pandalib.bukkit.plistener.PListener;
+import net.bxx2004.pandalib.bukkit.item.PItemStack;
+import net.bxx2004.pandalib.bukkit.listener.PListener;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
 @RegisterItem
 public class FT_COOPER extends Item<PItemStack> {
-    public FT_COOPER(){
+    public FT_COOPER() {
         super();
     }
+
     @Override
     public PItemStack itemStack() {
         return new PItemStack(
@@ -37,7 +39,7 @@ public class FT_COOPER extends Item<PItemStack> {
 
     @Override
     public ItemStack[] recipe() {
-        return new ItemStack[]{null,null,null,null,new PItemStack(Material.DEEPSLATE_LAPIS_ORE,"由未来世界产出"),null,null,null,null};
+        return new ItemStack[]{null, null, null, null, new PItemStack(Material.DEEPSLATE_LAPIS_ORE, "由未来世界产出"), null, null, null, null};
     }
 
     @Override

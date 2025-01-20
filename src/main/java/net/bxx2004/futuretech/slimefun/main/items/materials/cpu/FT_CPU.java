@@ -8,8 +8,8 @@ import net.bxx2004.futuretech.core.data.ConfigManager;
 import net.bxx2004.futuretech.core.utils.RegisterItem;
 import net.bxx2004.futuretech.slimefun.SlimefunFactory;
 import net.bxx2004.futuretech.slimefun.main.Item;
-import net.bxx2004.pandalib.bukkit.pitem.PItemStack;
-import net.bxx2004.pandalib.bukkit.plistener.PListener;
+import net.bxx2004.pandalib.bukkit.item.PItemStack;
+import net.bxx2004.pandalib.bukkit.listener.PListener;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -18,6 +18,7 @@ public class FT_CPU extends Item<PItemStack> {
     public FT_CPU() {
         super();
     }
+
     @Override
     public PItemStack itemStack() {
         return new PItemStack(Material.WHITE_STAINED_GLASS_PANE,
@@ -38,9 +39,9 @@ public class FT_CPU extends Item<PItemStack> {
     @Override
     public ItemStack[] recipe() {
         return new ItemStack[]{
-                SlimefunItems.GILDED_IRON,SlimefunItems.GILDED_IRON,SlimefunItems.GILDED_IRON,
-                SlimefunItems.GILDED_IRON,null,SlimefunItems.GILDED_IRON,
-                SlimefunItems.GILDED_IRON,SlimefunItems.GILDED_IRON,SlimefunItems.GILDED_IRON
+                SlimefunItems.GILDED_IRON, SlimefunItems.GILDED_IRON, SlimefunItems.GILDED_IRON,
+                SlimefunItems.GILDED_IRON, null, SlimefunItems.GILDED_IRON,
+                SlimefunItems.GILDED_IRON, SlimefunItems.GILDED_IRON, SlimefunItems.GILDED_IRON
         };
     }
 

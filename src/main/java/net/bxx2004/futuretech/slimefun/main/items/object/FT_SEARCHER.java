@@ -14,8 +14,8 @@ import net.bxx2004.futuretech.slimefun.Tools;
 import net.bxx2004.futuretech.slimefun.main.Item;
 import net.bxx2004.futuretech.slimefun.main.items.materials.basic.FT_COOPER;
 import net.bxx2004.futuretech.slimefun.main.items.materials.basic.FT_METEORCOPPER;
-import net.bxx2004.pandalib.bukkit.pitem.PItemStack;
-import net.bxx2004.pandalib.bukkit.plistener.PListener;
+import net.bxx2004.pandalib.bukkit.item.PItemStack;
+import net.bxx2004.pandalib.bukkit.listener.PListener;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -25,7 +25,8 @@ import org.jetbrains.annotations.NotNull;
 @RegisterItem
 public class FT_SEARCHER extends Item<PItemStack> implements Rechargeable {
     private float charge = 200;
-    public FT_SEARCHER(){
+
+    public FT_SEARCHER() {
         super();
     }
 
@@ -42,8 +43,8 @@ public class FT_SEARCHER extends Item<PItemStack> implements Rechargeable {
 
     @Override
     public PItemStack itemStack() {
-        PItemStack itemStack = new PItemStack(Material.SPYGLASS, ConfigManager.itemName(getID()),ConfigManager.itemLore(getID()));
-        itemStack.setItemMeta(Tools.setCharge(itemStack.getItemMeta(),300,300));
+        PItemStack itemStack = new PItemStack(Material.SPYGLASS, ConfigManager.itemName(getID()), ConfigManager.itemLore(getID()));
+        itemStack.setItemMeta(Tools.setCharge(itemStack.getItemMeta(), 300, 300));
         return itemStack;
     }
 
@@ -59,34 +60,35 @@ public class FT_SEARCHER extends Item<PItemStack> implements Rechargeable {
 
     @Override
     public ItemStack[] recipe() {
-        return new ItemStack[]{null,null,null,null, SlimefunItems.ELECTRO_MAGNET,null,null,new ItemStack(Material.DIAMOND_PICKAXE),null};
+        return new ItemStack[]{null, null, null, null, SlimefunItems.ELECTRO_MAGNET, null, null, new ItemStack(Material.DIAMOND_PICKAXE), null};
     }
 
     @Override
     public PListener listener() {
-        return new PListener(){
+        return new PListener() {
             @EventHandler
-            public void onBreak(PlayerInteractEvent event){
+            public void onBreak(PlayerInteractEvent event) {
                 try {
-                    if (BlockStorage.hasBlockInfo(event.getClickedBlock().getLocation())){
-                        if (BlockStorage.check(event.getClickedBlock(),new FT_COOPER().getID())){
+                    if (BlockStorage.hasBlockInfo(event.getClickedBlock().getLocation())) {
+                        if (BlockStorage.check(event.getClickedBlock(), new FT_COOPER().getID())) {
                             event.setCancelled(true);
-                            if (SlimefunItem.getByItem(event.getItem()) != null){
+                            if (SlimefunItem.getByItem(event.getItem()) != null) {
                                 if (SlimefunItem.getByItem(event.getItem()).getId().equalsIgnoreCase("FT_SEARCHER")) {
-                                    if (removeItemCharge(event.getItem(),1)){
+                                    if (removeItemCharge(event.getItem(), 1)) {
                                         event.setCancelled(true);
                                         event.getClickedBlock().setType(Material.AIR);
-                                        event.getClickedBlock().getWorld().dropItem(event.getClickedBlock().getLocation(),new FT_METEORCOPPER().getItem().getItem());
+                                        event.getClickedBlock().getWorld().dropItem(event.getClickedBlock().getLocation(), new FT_METEORCOPPER().getItem().getItem());
                                     }
-                                }else {
+                                } else {
                                     event.setCancelled(true);
                                 }
-                            }else {
+                            } else {
                                 event.setCancelled(true);
                             }
                         }
                     }
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
             }
         };
     }

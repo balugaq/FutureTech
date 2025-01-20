@@ -12,12 +12,13 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class Blocks {
     private MultiBlockMachine machine;
+
     public Blocks() {
-        if (SlimefunItem.getById(getID()) == null){
-            MultiBlockMachine machine = new MultiBlockMachine(group(),item(),recipe(),face()){
+        if (SlimefunItem.getById(getID()) == null) {
+            MultiBlockMachine machine = new MultiBlockMachine(group(), item(), recipe(), face()) {
                 @Override
                 public void onInteract(Player player, Block block) {
-                    onClick(player,block);
+                    onClick(player, block);
                 }
             };
             this.machine = machine;
@@ -25,16 +26,24 @@ public abstract class Blocks {
             machine.register(FutureTech.instance());
         }
     }
+
     public abstract void doSomeThing();
+
     public abstract ItemGroup group();
+
     public abstract SlimefunItemStack item();
+
     public abstract ItemStack[] recipe();
+
     public abstract BlockFace face();
+
     public abstract void onClick(Player player, Block block);
-    public String getID(){
+
+    public String getID() {
         return this.getClass().getSimpleName();
     }
-    public MultiBlockMachine getMachine(){
+
+    public MultiBlockMachine getMachine() {
         return this.machine;
     }
 }
