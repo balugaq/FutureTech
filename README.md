@@ -1,3 +1,4 @@
+A Slimefun addon cloned from https://gitee.com/bxx2004/FutureTech
 # FutureTech
  **插件正在开发中** 
 ![输入图片说明](https://s1.328888.xyz/2022/04/06/LEjLd.png)
