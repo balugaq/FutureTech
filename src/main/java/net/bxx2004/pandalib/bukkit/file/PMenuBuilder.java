@@ -1,6 +1,7 @@
 package net.bxx2004.pandalib.bukkit.file;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.bxx2004.futuretech.FutureTech;
 import net.bxx2004.pandalib.bukkit.gui.abandon.CustomGui;
 import net.bxx2004.pandalib.bukkit.item.PItemStack;
 import net.bxx2004.pandalib.bukkit.language.abandon.PAction;
@@ -164,12 +165,16 @@ public class PMenuBuilder {
                     if (stack1.hasItemMeta()) {
                         ItemMeta meta = stack1.getItemMeta();
                         if (meta.hasDisplayName()) {
-                            meta.setDisplayName(PlaceholderAPI.setPlaceholders(player, meta.getDisplayName()));
+                            if (FutureTech.enabledPlaceHolderAPI) {
+                                meta.setDisplayName(PlaceholderAPI.setPlaceholders(player, meta.getDisplayName()));
+                            }
                         }
                         if (meta.hasLore()) {
                             List<String> lore = new ArrayList<>();
                             for (String list : meta.getLore()) {
-                                lore.add(PlaceholderAPI.setPlaceholders(player, list));
+                                if (FutureTech.enabledPlaceHolderAPI) {
+                                    lore.add(PlaceholderAPI.setPlaceholders(player, list));
+                                }
                             }
                             meta.setLore(lore);
                         }

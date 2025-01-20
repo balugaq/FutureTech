@@ -1,6 +1,7 @@
 package net.bxx2004.pandalib.bukkit.language.component;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.bxx2004.futuretech.FutureTech;
 import net.bxx2004.pandalib.bukkit.language.Text;
 import net.bxx2004.pandalib.bukkit.language.TextType;
 import net.bxx2004.pandalib.bukkit.language.abandon.PMessage;
@@ -56,7 +57,9 @@ public class Score extends Text {
     public Score refresh(Player player) {
         for (int i = content.length - 1; i >= 0; i--) {
             for (String teamName : teamNames) {
-                scoreboard.getTeam(teamName).setPrefix(PlaceholderAPI.setPlaceholders(player, PMessage.replace(content[i])));
+                if (FutureTech.enabledPlaceHolderAPI) {
+                    scoreboard.getTeam(teamName).setPrefix(PlaceholderAPI.setPlaceholders(player, PMessage.replace(content[i])));
+                }
             }
         }
         return this;
@@ -74,7 +77,9 @@ public class Score extends Text {
                 }
                 int i = content.length - 1;
                 for (String teamName : teamNames) {
-                    player.getScoreboard().getTeam(teamName).setPrefix(PlaceholderAPI.setPlaceholders(player, PMessage.replace(content[i])));
+                    if (FutureTech.enabledPlaceHolderAPI) {
+                        player.getScoreboard().getTeam(teamName).setPrefix(PlaceholderAPI.setPlaceholders(player, PMessage.replace(content[i])));
+                    }
                     i--;
                 }
             });
