@@ -43,8 +43,8 @@ public class FT_GUIDE extends Item<PItemStack> {
     public ItemStack[] recipe() {
         return new ItemStack[]{
                 null, null, null,
-                null, new ItemStack(Material.WRITABLE_BOOK), null,
-                null, null, null
+                null, null, null,
+                null, null, new ItemStack(Material.WRITABLE_BOOK)
         };
     }
 
