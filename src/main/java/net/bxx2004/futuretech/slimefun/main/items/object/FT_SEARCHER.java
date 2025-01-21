@@ -6,11 +6,11 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.bxx2004.futuretech.core.data.ConfigManager;
 import net.bxx2004.futuretech.core.utils.RegisterItem;
 import net.bxx2004.futuretech.slimefun.SlimefunFactory;
-import net.bxx2004.futuretech.slimefun.Tools;
 import net.bxx2004.futuretech.slimefun.main.Item;
 import net.bxx2004.futuretech.slimefun.main.items.materials.basic.FT_COOPER;
 import net.bxx2004.futuretech.slimefun.main.items.materials.basic.FT_METEORCOPPER;
@@ -20,7 +20,10 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 @RegisterItem
 public class FT_SEARCHER extends Item<PItemStack> implements Rechargeable {
@@ -44,7 +47,12 @@ public class FT_SEARCHER extends Item<PItemStack> implements Rechargeable {
     @Override
     public PItemStack itemStack() {
         PItemStack itemStack = new PItemStack(Material.SPYGLASS, ConfigManager.itemName(getID()), ConfigManager.itemLore(getID()));
-        itemStack.setItemMeta(Tools.setCharge(itemStack.getItemMeta(), 300, 300));
+        String extraLore = LoreBuilder.powerCharged(0, 300);
+        ItemMeta meta = itemStack.getItemMeta();
+        List<String> lore = meta.getLore();
+        lore.add(extraLore);
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
         return itemStack;
     }
 

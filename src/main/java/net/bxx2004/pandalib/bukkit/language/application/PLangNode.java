@@ -72,6 +72,7 @@ public class PLangNode {
     public List<String> list(String node) {
         return PMessage.replace(langFile.getYaml().getStringList(node));
     }
+
     public String lang(String node) {
         return text(node);
     }

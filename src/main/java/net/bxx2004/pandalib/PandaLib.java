@@ -321,22 +321,25 @@ public class PandaLib {
                 );
                 PMath.regx("\\(.*\\)", origin,
                         con -> {
-                            if (PMath.sum(player, con.replaceAll("\\(", "").replaceAll("\\)", ""))) {
-                                if (body.get(0).contains(" => ")) {
-                                    for (String a : body.get(0).split(" => ")) {
-                                        PAction.go(a, player);
+                            try {
+                                if (PMath.sum(player, con.replaceAll("\\(", "").replaceAll("\\)", ""))) {
+                                    if (body.get(0).contains(" => ")) {
+                                        for (String a : body.get(0).split(" => ")) {
+                                            PAction.go(a, player);
+                                        }
+                                    } else {
+                                        PAction.go(body.get(0), player);
                                     }
                                 } else {
-                                    PAction.go(body.get(0), player);
-                                }
-                            } else {
-                                if (body.get(1).contains(" => ")) {
-                                    for (String a : body.get(1).split(" => ")) {
-                                        PAction.go(a, player);
+                                    if (body.get(1).contains(" => ")) {
+                                        for (String a : body.get(1).split(" => ")) {
+                                            PAction.go(a, player);
+                                        }
+                                    } else {
+                                        PAction.go(body.get(1), player);
                                     }
-                                } else {
-                                    PAction.go(body.get(1), player);
                                 }
+                            } catch (Exception ignored) {
                             }
                         }
                 );

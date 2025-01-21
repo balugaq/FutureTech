@@ -3,12 +3,9 @@ package net.bxx2004.futuretech.slimefun.inventory;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import net.bxx2004.futuretech.core.utils.RegisterMenu;
-import net.bxx2004.futuretech.slimefun.Tools;
 import net.bxx2004.pandalib.bukkit.item.PItemStack;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -16,6 +13,7 @@ import java.util.HashMap;
 @RegisterMenu
 public class CraftMenu extends Menu {
     private static ChestMenu inventory = new ChestMenu("未来科技制造台", 54);
+
     public CraftMenu() {
         super();
     }

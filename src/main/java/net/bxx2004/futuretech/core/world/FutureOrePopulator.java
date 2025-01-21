@@ -2,9 +2,6 @@ package net.bxx2004.futuretech.core.world;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import net.bxx2004.futuretech.slimefun.main.items.materials.basic.FT_COOPER;
-import net.bxx2004.futuretech.slimefun.main.items.materials.basic.FT_ENERGYORE;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
