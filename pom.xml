@@ -6,7 +6,7 @@
 
     <groupId>net.bxx2004</groupId>
     <artifactId>FutureTech</artifactId>
-    <version>6</version>
+    <version>8</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

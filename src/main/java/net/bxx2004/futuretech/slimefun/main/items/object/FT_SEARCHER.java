@@ -1,5 +1,6 @@
 package net.bxx2004.futuretech.slimefun.main.items.object;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -11,12 +12,17 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.bxx2004.futuretech.core.data.ConfigManager;
 import net.bxx2004.futuretech.core.utils.RegisterItem;
 import net.bxx2004.futuretech.slimefun.SlimefunFactory;
+import net.bxx2004.futuretech.slimefun.Tools;
 import net.bxx2004.futuretech.slimefun.main.Item;
 import net.bxx2004.futuretech.slimefun.main.items.materials.basic.FT_COOPER;
 import net.bxx2004.futuretech.slimefun.main.items.materials.basic.FT_METEORCOPPER;
 import net.bxx2004.pandalib.bukkit.item.PItemStack;
 import net.bxx2004.pandalib.bukkit.listener.PListener;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -27,7 +33,7 @@ import java.util.List;
 
 @RegisterItem
 public class FT_SEARCHER extends Item<PItemStack> implements Rechargeable {
-    private float charge = 200;
+    private float charge = 300;
 
     public FT_SEARCHER() {
         super();
@@ -47,12 +53,7 @@ public class FT_SEARCHER extends Item<PItemStack> implements Rechargeable {
     @Override
     public PItemStack itemStack() {
         PItemStack itemStack = new PItemStack(Material.SPYGLASS, ConfigManager.itemName(getID()), ConfigManager.itemLore(getID()));
-        String extraLore = LoreBuilder.powerCharged(0, 300);
-        ItemMeta meta = itemStack.getItemMeta();
-        List<String> lore = meta.getLore();
-        lore.add(extraLore);
-        meta.setLore(lore);
-        itemStack.setItemMeta(meta);
+        itemStack.setItemMeta(Tools.setCharge(itemStack.getItemMeta(), 300, 300));
         return itemStack;
     }
 
@@ -77,25 +78,30 @@ public class FT_SEARCHER extends Item<PItemStack> implements Rechargeable {
             @EventHandler
             public void onBreak(PlayerInteractEvent event) {
                 try {
-                    if (BlockStorage.hasBlockInfo(event.getClickedBlock().getLocation())) {
-                        if (BlockStorage.check(event.getClickedBlock(), new FT_COOPER().getID())) {
-                            event.setCancelled(true);
-                            if (SlimefunItem.getByItem(event.getItem()) != null) {
-                                if (SlimefunItem.getByItem(event.getItem()).getId().equalsIgnoreCase("FT_SEARCHER")) {
-                                    if (removeItemCharge(event.getItem(), 1)) {
-                                        event.setCancelled(true);
-                                        event.getClickedBlock().setType(Material.AIR);
-                                        event.getClickedBlock().getWorld().dropItem(event.getClickedBlock().getLocation(), new FT_METEORCOPPER().getItem().getItem());
-                                    }
-                                } else {
-                                    event.setCancelled(true);
-                                }
-                            } else {
-                                event.setCancelled(true);
-                            }
-                        }
+                    Player player = event.getPlayer();
+                    ItemStack itemStack = event.getItem();
+                    SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
+                    if (slimefunItem == null || !slimefunItem.getId().equals("FT_SEARCHER")) {
+                        return;
                     }
+
+                    String cooperId = new FT_COOPER().getID();
+                    Block block = event.getClickedBlock();
+                    Location location = block.getLocation();
+                    SlimefunItem blockItem = StorageCacheUtils.getSfItem(location);
+                    if (blockItem == null || !cooperId.equals(blockItem.getId())) {
+                        return;
+                    }
+
+                    if (!removeItemCharge(event.getItem(), 300)) {
+                        return;
+                    }
+
+                    event.setCancelled(true);
+                    event.getClickedBlock().setType(Material.AIR);
+                    event.getClickedBlock().getWorld().dropItem(event.getClickedBlock().getLocation(), new FT_METEORCOPPER().getItem().getItem());
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         };
