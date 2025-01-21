@@ -15,6 +15,7 @@ import net.bxx2004.pandalib.bukkit.task.depend.MultiPluginDependTask;
 import net.bxx2004.pandalib.bukkit.util.PCooldown;
 import net.bxx2004.pandalib.bukkit.util.PMath;
 import net.bxx2004.pandalibloader.BukkitPlugin;
+import net.bxx2004.pandalibloader.Path;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -26,6 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@Path(pack = "net.bxx2004.futuretech.FutureTech")
 public class FutureTech extends BukkitPlugin implements SlimefunAddon {
     public static PLangNode node;
     public static PCooldown cooldown;
