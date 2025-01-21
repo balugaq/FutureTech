@@ -1,5 +1,6 @@
 package net.bxx2004.futuretech.slimefun.inventory;
 
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import net.bxx2004.pandalib.bukkit.item.PItemStack;
 import net.bxx2004.pandalib.bukkit.listener.PListener;
 import org.bukkit.entity.Player;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Menu {
     public static HashMap<Integer, String> hookList = new HashMap<>();
@@ -20,7 +22,7 @@ public abstract class Menu {
                 @EventHandler
                 public void clickEvent(InventoryClickEvent event) {
                     try {
-                        if (event.getClickedInventory().getHolder().equals(inventory().getHolder())) {
+                        if (Objects.equals(event.getClickedInventory().getHolder(), inventory().getInventory().getHolder())) {
                             if (canUseSlots().length <= 0) {
                                 event.setCancelled(true);
                             } else {
@@ -42,7 +44,7 @@ public abstract class Menu {
                                 e.printStackTrace();
                             }
                         }
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
                     }
                 }
             }.hook("FutureTech");
@@ -54,14 +56,16 @@ public abstract class Menu {
 
     public abstract void click(Player player, PItemStack itemStack, int slot);
 
-    public abstract Inventory inventory();
+    public abstract ChestMenu inventory();
 
     public abstract HashMap<Integer, PItemStack> layout();
 
     public void open(Player player) {
         for (int a : layout().keySet()) {
-            inventory().setItem(a, layout().get(a));
+            inventory().replaceExistingItem(a, layout().get(a));
         }
-        player.openInventory(inventory());
+        inventory().setPlayerInventoryClickable(false);
+        inventory().setEmptySlotsClickable(false);
+        inventory().open(player);
     }
 }

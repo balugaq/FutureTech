@@ -1,6 +1,7 @@
 package net.bxx2004.futuretech.slimefun.inventory;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import net.bxx2004.futuretech.core.data.ConfigManager;
 import net.bxx2004.futuretech.core.utils.RegisterMenu;
 import net.bxx2004.futuretech.slimefun.Tools;
@@ -19,7 +20,7 @@ import java.util.List;
 public class GuideMenu extends Menu {
     public static List<PItemStack[]> recipe = new ArrayList<PItemStack[]>();
     public static List<SlimefunItem> result = new ArrayList<>();
-    private static Inventory inventory = Bukkit.createInventory(Tools.setHolder("GuideMenu"), 54, ConfigManager.itemGroup("main"));
+    private static ChestMenu inventory = new ChestMenu(ConfigManager.itemGroup("main"), 54);
     private static HashMap<String, Integer> pages = new HashMap<>();
 
     public GuideMenu() {
@@ -37,7 +38,7 @@ public class GuideMenu extends Menu {
     }
 
     @Override
-    public Inventory inventory() {
+    public ChestMenu inventory() {
         return inventory;
     }
 
@@ -59,13 +60,13 @@ public class GuideMenu extends Menu {
                 int a = 0;
                 for (int i : lay) {
                     if (recipe.get(pages.get(player.getName()))[a] == null) {
-                        inventory().setItem(i, new ItemStack(Material.AIR));
+                        inventory().replaceExistingItem(i, new ItemStack(Material.AIR));
                     } else {
-                        inventory().setItem(i, recipe.get(pages.get(player.getName()))[a]);
+                        inventory().replaceExistingItem(i, recipe.get(pages.get(player.getName()))[a]);
                     }
                     a = a + 1;
                 }
-                inventory().setItem(33, result.get(pages.get(player.getName())).getItem());
+                inventory().replaceExistingItem(33, result.get(pages.get(player.getName())).getItem());
             }
         }
         if (slot == 43) {
@@ -77,13 +78,13 @@ public class GuideMenu extends Menu {
                 int a = 0;
                 for (int i : lay) {
                     if (recipe.get(pages.get(player.getName()))[a] == null) {
-                        inventory().setItem(i, new ItemStack(Material.AIR));
+                        inventory().replaceExistingItem(i, new ItemStack(Material.AIR));
                     } else {
-                        inventory().setItem(i, recipe.get(pages.get(player.getName()))[a]);
+                        inventory().replaceExistingItem(i, recipe.get(pages.get(player.getName()))[a]);
                     }
                     a = a + 1;
                 }
-                inventory().setItem(33, result.get(pages.get(player.getName())).getItem());
+                inventory().replaceExistingItem(33, result.get(pages.get(player.getName())).getItem());
             }
         }
     }

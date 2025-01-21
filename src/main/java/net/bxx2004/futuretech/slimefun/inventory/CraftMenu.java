@@ -1,6 +1,7 @@
 package net.bxx2004.futuretech.slimefun.inventory;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import net.bxx2004.futuretech.core.utils.RegisterMenu;
 import net.bxx2004.futuretech.slimefun.Tools;
 import net.bxx2004.pandalib.bukkit.item.PItemStack;
@@ -14,8 +15,7 @@ import java.util.HashMap;
 
 @RegisterMenu
 public class CraftMenu extends Menu {
-    private static Inventory inventory = Bukkit.createInventory(Tools.setHolder("CraftMenu"), 54, "未来科技制造台");
-
+    private static ChestMenu inventory = new ChestMenu("未来科技制造台", 54);
     public CraftMenu() {
         super();
     }
@@ -58,21 +58,21 @@ public class CraftMenu extends Menu {
             int[] c = new int[]{9, 10, 11, 12, 13, 18, 19, 20, 21, 22, 27, 28, 29, 30, 31, 36, 37, 38, 39, 40, 45, 46, 47, 48, 49};
             PItemStack[] recipe = new PItemStack[25];
             for (int i = 0; i < c.length; i++) {
-                if (inventory.getItem(c[i]) == null) {
+                if (inventory.getItemInSlot(c[i]) == null) {
                     recipe[i] = new PItemStack(Material.BARRIER, "空");
                 } else {
-                    recipe[i] = new PItemStack(inventory.getItem(c[i]));
+                    recipe[i] = new PItemStack(inventory.getItemInSlot(c[i]));
                 }
             }
             int o = 0;
             for (PItemStack[] cacheRepice : GuideMenu.recipe) {
                 if (canWork(nullTranslate(recipe), nullTranslate(cacheRepice))) {
-                    if (SlimefunItem.getByItem(inventory.getItem(43)) != null) {
-                        if (SlimefunItem.getByItem(inventory.getItem(43)).getId().equals("BATTERY")) {
+                    if (SlimefunItem.getByItem(inventory.getItemInSlot(43)) != null) {
+                        if (SlimefunItem.getByItem(inventory.getItemInSlot(43)).getId().equals("BATTERY")) {
                             for (int i : canUseSlots()) {
-                                inventory.setItem(i, new ItemStack(Material.AIR));
+                                inventory.replaceExistingItem(i, new ItemStack(Material.AIR));
                             }
-                            inventory.setItem(25, GuideMenu.result.get(o).getItem());
+                            inventory.replaceExistingItem(25, GuideMenu.result.get(o).getItem());
                         }
                     }
                 }
@@ -82,7 +82,7 @@ public class CraftMenu extends Menu {
     }
 
     @Override
-    public Inventory inventory() {
+    public ChestMenu inventory() {
         return inventory;
     }
 
