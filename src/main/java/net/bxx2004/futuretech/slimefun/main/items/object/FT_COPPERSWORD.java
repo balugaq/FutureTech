@@ -4,6 +4,8 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
+import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedEnchantment;
+import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedPotionEffectType;
 import net.bxx2004.futuretech.core.data.ConfigManager;
 import net.bxx2004.futuretech.core.utils.RegisterItem;
 import net.bxx2004.futuretech.slimefun.SlimefunFactory;
@@ -33,7 +35,7 @@ public class FT_COPPERSWORD extends Item<PItemStack> {
         PItemStack stack = new PItemStack(Material.IRON_SWORD,
                 ConfigManager.itemName(getID()),
                 ConfigManager.itemLore(getID()));
-        stack.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 3);
+        stack.addUnsafeEnchantment(VersionedEnchantment.SHARPNESS, 3);
         return stack;
     }
 
@@ -65,10 +67,10 @@ public class FT_COPPERSWORD extends Item<PItemStack> {
                 if ((event.getDamager() instanceof Player) && (event.getEntity() instanceof LivingEntity)) {
                     Player player = (Player) event.getDamager();
                     LivingEntity entity = (LivingEntity) event.getEntity();
-                    if (SlimefunItem.getByItem(player.getItemInUse()) != null) {
-                        if (SlimefunItem.getByItem(player.getItemInUse()).getId().equalsIgnoreCase(getID())) {
+                    if (SlimefunItem.getByItem(player.getItemInHand()) != null) {
+                        if (SlimefunItem.getByItem(player.getItemInHand()).getId().equalsIgnoreCase(getID())) {
                             if (PMath.getRandomAsInt(0, 100) < 10) {
-                                entity.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 60, 1));
+                                entity.addPotionEffect(new PotionEffect(VersionedPotionEffectType.NAUSEA, 60, 1));
                             }
                         }
                     }
