@@ -3,81 +3,119 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.bxx2004</groupId>
   <artifactId>FutureTech</artifactId>
-  <version>2</version>
+  <version>1.0.9</version>
   <build>
+    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    <defaultGoal>clean package</defaultGoal>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>${basedir}/src/main/resources</directory>
+        <includes>
+          <include>**/*.*</include>
+          <include>tags/*.json</include>
+        </includes>
+      </resource>
+    </resources>
+    <finalName>${project.name} v${project.version}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
+        <version>3.6.0</version>
         <executions>
           <execution>
             <phase>package</phase>
             <goals>
               <goal>shade</goal>
             </goals>
-            <configuration>
-              <dependencySets>
-                <dependencySet>
-                  <includes>
-                    <include>net.bxx2004:PandaLib</include>
-                  </includes>
-                  <outputDirectory>/</outputDirectory>
-                  <useProjectArtifact>false</useProjectArtifact>
-                  <unpack>false</unpack>
-                </dependencySet>
-              </dependencySets>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>**</include>
-                  </includes>
-                </filter>
-              </filters>
-              <transformers>
-                <transformer>
-                  <mainClass>net.bxx2004.futuretech.FutureTech</mainClass>
-                </transformer>
-              </transformers>
-            </configuration>
           </execution>
         </executions>
+        <configuration>
+          <minimizeJar>true</minimizeJar>
+          <filters>
+            <filter>
+              <artifact>*:*</artifact>
+              <excludes>
+                <exclude>META-INF/*</exclude>
+              </excludes>
+            </filter>
+          </filters>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.15.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <forceJavacCompilerUse>true</forceJavacCompilerUse>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.44.5</version>
+        <configuration>
+          <java>
+            <palantirJavaFormat>
+              <version>2.38.0</version>
+              <style>PALANTIR</style>
+            </palantirJavaFormat>
+            <removeUnusedImports />
+            <formatAnnotations />
+          </java>
+        </configuration>
       </plugin>
     </plugins>
   </build>
   <repositories>
     <repository>
-      <id>papermc</id>
-      <url>https://papermc.io/repo/repository/maven-public/</url>
+      <id>papermc-repo</id>
+      <url>https://repo.papermc.io/repository/maven-public/</url>
     </repository>
     <repository>
       <id>jitpack.io</id>
       <url>https://jitpack.io</url>
+    </repository>
+    <repository>
+      <id>placeholderapi</id>
+      <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+    </repository>
+    <repository>
+      <id>minebench-repo</id>
+      <url>https://repo.minebench.de/</url>
     </repository>
   </repositories>
   <dependencies>
     <dependency>
       <groupId>com.github.SlimefunGuguProject</groupId>
       <artifactId>Slimefun4</artifactId>
-      <version>b39097e015</version>
+      <version>2025.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
-      <version>1.18.2-R0.1-SNAPSHOT</version>
+      <version>1.21.11-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>net.bxx2004</groupId>
-      <artifactId>PandaLib</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/lib/PandaLib.jar</systemPath>
+      <groupId>net.bytebuddy</groupId>
+      <artifactId>byte-buddy</artifactId>
+      <version>1.14.6</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.guizhanss</groupId>
+      <artifactId>GuizhanLibPlugin</artifactId>
+      <version>2.5.0</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <properties>
-    <maven.compiler.target>17</maven.compiler.target>
-    <maven.compiler.source>17</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
   </properties>
 </project>
