@@ -49,7 +49,12 @@
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                    <!-- 禁用注解处理，避免 javac 未来版本行为变化带来的提示 -->
+                    <proc>none</proc>
+                    <compilerArgs>
+                        <arg>-Xlint:-options</arg>
+                        <arg>-Xlint:-removal</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -103,6 +108,13 @@
         </repository>
     </repositories>
     <dependencies>
+        <!-- 解决 cannot access NullMarked 的核心依赖 -->
+        <dependency>
+            <groupId>org.jspecify</groupId>
+            <artifactId>jspecify</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.github.SlimefunGuguProject</groupId>
             <artifactId>Slimefun4</artifactId>
